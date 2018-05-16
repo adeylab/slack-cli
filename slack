@@ -90,7 +90,7 @@ if (defined $opt{'c'}) {
 
 $slack_command .= " https://slack.com/api/files.upload";
 
-print "\nSlack curl command: $slack_command\n";
+print "\nSlack curl command: $slack_command\n\n";
 
 system($slack_command);
 
