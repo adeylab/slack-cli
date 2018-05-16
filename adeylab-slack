@@ -54,7 +54,7 @@ if (defined $opt{'u'}) {
 }
 
 if (defined $opt{'F'} && defined  $opt{'T'}) {
-	$slack_command = "slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\" -F $opt{'F'} -T $opt{'T'}";
+	$slack_command = "slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\" -F $opt{'F'} -T \"$opt{'T'}\"";
 } elsif (defined $opt{'F'}) {
 	$slack_command = "slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\" -F $opt{'F'}";
 } else {
