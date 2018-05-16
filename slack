@@ -25,10 +25,12 @@ Usage: adeylab-slack [options] [channel]
 Try to avoid special characters in the message. (e.g. !)
 
 Options: (at least one of -m or -F must be specified)
-   -F   [STR]   File to post
    -m   [STR]   Message to post (in double quotes)
+   
+   -F   [STR]   File to post (overrides -m message)
    -c   [STR]   Initial comment on file (in double quotes)
    -T   [STR]   Title of file (in double quotes)
+
    -t   [STR]   Slack token (if not in ~/.slack_token file)
    -w   [STR]   Token to use (default is first)
                 (can specify the name of the token, ie workspace
