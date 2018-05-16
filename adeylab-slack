@@ -2,6 +2,8 @@
 
 # adeylab slack workspace slack-cli wrapper
 
+use Getopt::Std; %opt = ();
+
 # Channel -> webhook hash
 
 %CHANNELS = (
