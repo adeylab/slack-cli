@@ -24,6 +24,8 @@ Wrapper to directly post messages and files to the adeylab Slack workspace.
 
 Usage: adeylab-slack [options] [channel] [\"message\"]
 
+Try to avoid special characters in the message. (e.g. !)
+
 Options:
    -F   [STR]   File to upload
    -u   [STR]   Username (default is your OHSU/acc username)
