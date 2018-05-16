@@ -34,6 +34,10 @@ Options: (either -F OR -m must be specified)
 
 ";
 
+for ($i = 0; $i < @ARGV; $i++) {
+	$ARGV[$i] =~ s/^#//;
+}
+
 getopts("F:m:t:w:", \%opt);
 
 if (!defined $ARGV[0] || (!defined $opt{'F'} && !defined $opt{'m'})) {die $die};
