@@ -24,9 +24,11 @@ Usage: adeylab-slack [options] [channel]
 
 Try to avoid special characters in the message. (e.g. !)
 
-Options: (either -F OR -m must be specified)
+Options: (at least one of -m or -F must be specified)
    -F   [STR]   File to post
    -m   [STR]   Message to post (in double quotes)
+   -c   [STR]   Initial comment on file (in double quotes)
+   -T   [STR]   Title of file (in double quotes)
    -t   [STR]   Slack token (if not in ~/.slack_token file)
    -w   [STR]   Token to use (default is first)
                 (can specify the name of the token, ie workspace
@@ -38,10 +40,9 @@ for ($i = 0; $i < @ARGV; $i++) {
 	$ARGV[$i] =~ s/^#//;
 }
 
-getopts("F:m:t:w:", \%opt);
+getopts("F:m:t:w:c:T:", \%opt);
 
 if (!defined $ARGV[0] || (!defined $opt{'F'} && !defined $opt{'m'})) {die $die};
-if (defined $opt{'F'} && defined $opt{'m'}) {die "\nMust specify -f OR -m, not both!\n"};
 if (!defined $opt{'w'}) {$opt{'w'} = 1};
 
 if (defined $opt{'t'}) {
@@ -67,10 +68,22 @@ if (defined $opt{'t'}) {
 	die "\nNo token specified and ~/.slack_token file does not exist!\n";
 }
 
+$slack_command = "curl -F token=$token https://slack.com/api/files.upload -F channels=#$ARGV[0]";
+
 if (defined $opt{'m'}) {
-	$slack_command = "curl -F content=\"$opt{'m'}\" -F channels=#$ARGV[0] -F token=$token https://slack.com/api/files.upload";
-} elsif (defined $opt{'F'}) {
-	$slack_command = "curl -F file=\@$opt{'F'} -F channels=#$ARGV[0] -F token=$token https://slack.com/api/files.upload";
+	$slack_command .= " -F content=\"$opt{'m'}\"";
+}
+
+if (defined $opt{'F'}) {
+	$slack_command = " -F file=\@$opt{'F'}";
+}
+
+if (defined $opt{'T'}) {
+	$slack_command = " -F title=\"$opt{'T'}\"";
+}
+
+if (defined $opt{'c'}) {
+	$slack_command = " -F initial_comment=\"$opt{'c'}\"";
 }
 
 print "\nSlack curl command: $slack_command\n";
