@@ -1,3 +1,60 @@
 #!/usr/bin/perl
 
 # adeylab slack workspace slack-cli wrapper
+
+# Channel -> webhook hash
+
+%CHANNELS = (
+	"sci_atac_analysis" => "https://hooks.slack.com/services/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",
+	"scitools" => "https://hooks.slack.com/services/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",
+	"sci_atac_protocol" => "https://hooks.slack.com/services/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"
+);
+	
+
+$channel_list = "";
+foreach $channel (keys %CHANNELS) {
+	$channel_list .= "$channel\n";
+}
+
+$die = "
+
+Wrapper to directly post messages and files to the adeylab Slack workspace.
+
+Usage: adeylab-slack [options] [channel] [\"message\"]
+
+Options:
+   -F   [STR]   File to upload
+   -u   [STR]   Username (default is your OHSU/acc username)
+   -T   [STR]   File title in double quotes (e.g. \"My Title\")
+
+Available Channels:
+	$channel_list
+";
+
+getopts("F:u:C:T:", \%opt);
+
+if (!defined $ARGV[1]) {die $die};
+
+$channel = shift(@ARGV);
+
+if (!defined $CHANNELS{$channel}) {
+	die "\nThe channel provided ($channel) is not registered in WebHook.\n";
+}
+
+$message = join(" ", @ARGV); $message =~ s/\"//g;
+
+if (defined $opt{'u'}) {
+	$user = $opt{'u'};
+} else {
+	$user = "\$(whoami)";
+}
+
+if (defined $opt{'F'} && defined  $opt{'T'}) {
+	system("slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\" -F $opt{'F'} -T $opt{'T'}");
+} elsif (defined $opt{'F'}) {
+	system("slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\" -F $opt{'F'}");
+} else {
+	system("slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\"");
+}
+
+exit;
