@@ -68,7 +68,7 @@ if (defined $opt{'t'}) {
 	die "\nNo token specified and ~/.slack_token file does not exist!\n";
 }
 
-$slack_command = "curl -F token=$token https://slack.com/api/files.upload -F channels=#$ARGV[0]";
+$slack_command = "curl -F token=$token -F channels=#$ARGV[0]";
 
 if (defined $opt{'m'}) {
 	$slack_command .= " -F content=\"$opt{'m'}\"";
@@ -85,6 +85,8 @@ if (defined $opt{'T'}) {
 if (defined $opt{'c'}) {
 	$slack_command .= " -F initial_comment=\"$opt{'c'}\"";
 }
+
+$slack_command .= " https://slack.com/api/files.upload";
 
 print "\nSlack curl command: $slack_command\n";
 
