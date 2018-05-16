@@ -75,15 +75,15 @@ if (defined $opt{'m'}) {
 }
 
 if (defined $opt{'F'}) {
-	$slack_command = " -F file=\@$opt{'F'}";
+	$slack_command .= " -F file=\@$opt{'F'}";
 }
 
 if (defined $opt{'T'}) {
-	$slack_command = " -F title=\"$opt{'T'}\"";
+	$slack_command .= " -F title=\"$opt{'T'}\"";
 }
 
 if (defined $opt{'c'}) {
-	$slack_command = " -F initial_comment=\"$opt{'c'}\"";
+	$slack_command .= " -F initial_comment=\"$opt{'c'}\"";
 }
 
 print "\nSlack curl command: $slack_command\n";
