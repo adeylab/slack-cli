@@ -15,7 +15,7 @@ Then click the \"Create Token\" button. You can copy the token and use it
 as the option -t, OR, save it in a file called \".slack_token\" in your
 home directory that has the token. Be sure to run:
 
-   'chmod 400 .slack_token'
+   'chmod 600 .slack_token'
 
 To ensure no one else can read it. The file should have the workspace name
 a tab and then the token.   
@@ -41,8 +41,8 @@ if (!defined $opt{'w'}) {$opt{'w'} = 1};
 
 if (defined $opt{'t'}) {
 	$token = $opt{'t'};
-} elsif (-e "~/.slack_token") {
-	open T, "~/.slack_token";
+} elsif (-e "$ENV{'HOME'}/.slack_token") {
+	open T, "$ENV{'HOME'}/.slack_token";
 	@TOKENS = ("null");
 	while ($l = <T>) {
 		chomp $l;
