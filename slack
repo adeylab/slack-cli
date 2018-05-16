@@ -37,6 +37,7 @@ Options: (either -F OR -m must be specified)
 getopts("F:m:t:w:", \%opt);
 
 if (!defined $ARGV[0] || (!defined $opt{'F'} && !defined $opt{'m'})) {die $die};
+if (defined $opt{'F'} && defined $opt{'m'}) {die "\nMust specify -f OR -m, not both!\n"};
 if (!defined $opt{'w'}) {$opt{'w'} = 1};
 
 if (defined $opt{'t'}) {
