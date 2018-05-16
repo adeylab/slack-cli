@@ -53,8 +53,8 @@ if (defined $opt{'t'}) {
 	close T;
 	if (defined $WORKSPACE_token{$opt{'w'}}) {
 		$token = $WORKSPACE_token{$opt{'w'}};
-	} elsif ($opt{'i'} =~ /\d+/) {
-		$token = $TOKENS[$opt{'i'}];
+	} elsif ($opt{'w'} =~ /\d+/) {
+		$token = $TOKENS[$opt{'w'}];
 	} else {
 		die "\nA workspace or line number is specified that is not valid (option -w)\n";
 	}
