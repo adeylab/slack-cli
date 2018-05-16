@@ -15,7 +15,7 @@ use Getopt::Std; %opt = ();
 
 $channel_list = "";
 foreach $channel (keys %CHANNELS) {
-	$channel_list .= "$channel\n";
+	$channel_list .= "$channel\n\t";
 }
 
 $die = "
@@ -52,11 +52,15 @@ if (defined $opt{'u'}) {
 }
 
 if (defined $opt{'F'} && defined  $opt{'T'}) {
-	system("slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\" -F $opt{'F'} -T $opt{'T'}");
+	$slack_command = "slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\" -F $opt{'F'} -T $opt{'T'}";
 } elsif (defined $opt{'F'}) {
-	system("slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\" -F $opt{'F'}");
+	$slack_command = "slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\" -F $opt{'F'}";
 } else {
-	system("slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\"");
+	$slack_command = "slack -h $CHANNELS{$channel} -c $channel -u $user -m \"$message\"";
 }
+
+print "\nSlack post command:\n\t$slack_command\n";
+system($slack_command);
+print "\n";
 
 exit;
