@@ -1,0 +1,44 @@
+#!/usr/bin/perl
+
+$die = "
+
+This wrapper is run around a command and will pos a message to slack when completed.
+Since these messages are tailored to individuals, it is set up to post to your
+username channel.
+
+This tool requires a '.slack_webhook' file in your home directory - a tab delimited
+file with column 1 as the channel (one must be your username) and column 2 as the
+webhook for that channel.
+
+Usage:
+alert-slack [my command and all arguments]
+
+";
+
+if (!defined $ARGV[0]) {die $die};
+
+$username = $ENV{'USERNAME'};
+
+if (-e "$ENV{'HOME'}/.slack_webhook") {
+	$slack_webhook = "";
+	open WH, "$ENV{'HOME'}/.slack_webhook";
+	while ($l = <WH>) {
+		chomp $l;
+		($channel,$webhook) = split(/\t/, $l);
+		if ($channel eq $username) {
+			$slack_webhook = $webhook;
+		}
+	} close WH;
+} else {
+	die "\nERROR: Cannot find .slack_webhook in home directory!\n";
+}
+
+if ($slack_webhook eq "") {die "ERROR: webhook for $username could not be found in .slack_webhook!\n"};
+
+$command = join(" ", @ARGV);
+
+system("$command");
+
+system("curl -s -d \"payload={\"text\": \"$command completed!\"}\" $slack_webhook");
+
+exit;
