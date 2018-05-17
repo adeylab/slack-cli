@@ -1,10 +1,10 @@
-Wrapper to directly post messages and files to the adeylab Slack workspace.
+Wrapper to directly post messages and files to a Slack workspace.
 To use this, log into slack in your web browser and go here:
 
    https://api.slack.com/custom-integrations/legacy-tokens
    
 Then click the "Create Token" button. You can copy the token and use it
-as the option -t, OR, save it in a file called \".slack_token\" in your
+as the option -t, OR, save it in a file called ".slack_token" in your
 home directory that has the token. Be sure to run:
 
    'chmod 600 .slack_token'
