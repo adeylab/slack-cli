@@ -20,7 +20,7 @@ home directory that has the token. Be sure to run:
 To ensure no one else can read it. The file should have the workspace name
 a tab and then the token.   
 
-Usage: adeylab-slack [options] [channel]
+Usage: slack [options] [channel]
 
 Try to avoid special characters in the message. (e.g. !)
 
