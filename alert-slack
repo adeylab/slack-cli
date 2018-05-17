@@ -17,7 +17,7 @@ alert-slack [my command and all arguments]
 
 if (!defined $ARGV[0]) {die $die};
 
-$username = $ENV{'USERNAME'};
+$username = $ENV{'USER'};
 
 if (-e "$ENV{'HOME'}/.slack_webhook") {
 	$slack_webhook = "";
@@ -39,6 +39,6 @@ $command = join(" ", @ARGV);
 
 system("$command");
 
-system("curl -s -d \"payload={\"text\": \"$command completed!\"}\" $slack_webhook");
+system("message-slack -h $slack_webhook -c \@$username -u $username -m \"$command completed.\"");
 
 exit;
