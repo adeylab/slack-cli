@@ -39,6 +39,7 @@ $command = join(" ", @ARGV);
 
 system("$command");
 
-system("message-slack -h $slack_webhook -c \@$username -u $username -m \"$command completed.\"");
+$ts = localtime(time);
+system("message-slack -h $slack_webhook -c \@$username -u $username -m \"$ts, $command completed.\"");
 
 exit;
