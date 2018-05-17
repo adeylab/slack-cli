@@ -1,3 +1,6 @@
+This is a tool written for convenient posting of plots etc... to the
+Adey Lab Slack workspace. It should work fine for any workspace though.
+
 Wrapper to directly post messages and files to a Slack workspace.
 To use this, log into slack in your web browser and go here:
 
