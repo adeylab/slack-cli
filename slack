@@ -22,8 +22,6 @@ a tab and then the token.
 
 Usage: slack [options] [channel]
 
-Try to avoid special characters in the message. (e.g. !)
-
 Options: (at least one of -m or -F must be specified)
    -m   [STR]   Message to post (in double quotes)
    
@@ -35,6 +33,9 @@ Options: (at least one of -m or -F must be specified)
    -w   [STR]   Token to use (default is first)
                 (can specify the name of the token, ie workspace
                  or the line number)
+
+For arguments in double quotes, it is fine to include spaces, but some
+special characters (e.g. !) are not compatible.
 
 ";
 
