@@ -15,7 +15,8 @@ if (!defined $ARGV[1]) {die $die};
 
 $exit = 0; $pull_ct = 0;
 while ($exit == 0) {
-	($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
+	$ts = localtime(time);
+	($day_name,$mon,$mday,$time,$year) = split(/\s+/, $ts);
 	if ($cat =~ /^m/i) {
 		if (lc(substr($value,0,3)) eq lc(substr($mon,0,3))) {$exit = 1};
 	} elsif ($cat =~ /^d/i) {
@@ -25,7 +26,9 @@ while ($exit == 0) {
 	} else {die "ERROR: Must specify month day or year!\n$die"};
 	if ($exit > 0) {
 		if (defined $ARGV[2]) {
-			system("slack -m \"Ending auto pull ($ARGV[0]), $pull_ct total pulls\" $ARGV[2]");
+			system("slack -m \"Ending auto pull ($ARGV[0], $mon $mday, $year), $pull_ct total pulls\" $ARGV[2]");
+		} else {
+			print STDERR "Ending auto pull ($ARGV[0], $mon $mday, $year), $pull_ct total pulls\n";
 		}
 	} else {
 		system("git reset --hard");
