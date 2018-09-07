@@ -37,6 +37,7 @@ while ($exit == 0) {
 				system("slack -c \"Auto git pull completed.\" $ARGV[2]");
 			}
 		}
+		sleep($ARGV[1]);
 	}
 }
 exit;
