@@ -25,7 +25,7 @@ while ($exit == 0) {
 	} else {die "ERROR: Must specify month day or year!\n$die"};
 	if ($exit > 0) {
 		if (defined $ARGV[2]) {
-			system("slack -c \"Ending auto pull ($ARGV[0]), $pull_ct total pulls\" $ARGV[2]");
+			system("slack -m \"Ending auto pull ($ARGV[0]), $pull_ct total pulls\" $ARGV[2]");
 		}
 	} else {
 		system("git reset --hard");
@@ -34,7 +34,7 @@ while ($exit == 0) {
 		if ($in !~ /^Already/) {
 			$pull_ct++;
 			if (defined $ARGV[2]) {
-				system("slack -c \"Auto git pull completed.\" $ARGV[2]");
+				system("slack -m \"Auto git pull completed.\" $ARGV[2]");
 			}
 		}
 		sleep($ARGV[1]);
