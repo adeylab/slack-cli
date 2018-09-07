@@ -20,9 +20,9 @@ while ($exit == 0) {
 	if ($cat =~ /^m/i) {
 		if (lc(substr($value,0,3)) eq lc(substr($mon,0,3))) {$exit = 1};
 	} elsif ($cat =~ /^d/i) {
-		if ($value >= $mday) {$exit = 1};
+		if ($value <= $mday) {$exit = 1};
 	} elsif ($cat =~ /^y/i) {
-		if ($value >= $year) {$exit = 1};
+		if ($value <= $year) {$exit = 1};
 	} else {die "ERROR: Must specify month day or year!\n$die"};
 	if ($exit > 0) {
 		if (defined $ARGV[2]) {
