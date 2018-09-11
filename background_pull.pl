@@ -13,6 +13,12 @@ ARGV2 = (if specified, slack channel to post to)
 if (!defined $ARGV[1]) {die $die};
 ($cat,$value) = split(/=/, $ARGV[0]);
 
+if (defined $ARGV[2]) {
+	$ts = localtime(time);
+	($day_name,$mon,$mday,$time,$year) = split(/\s+/, $ts);
+	system("slack -m \"Starting auto pull. Start = ($mon $mday, $year), End = $ARGV[0]\" $ARGV[2] >/dev/null 2>/dev/null");
+}
+
 $exit = 0; $pull_ct = 0;
 while ($exit == 0) {
 	$ts = localtime(time);
