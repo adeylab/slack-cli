@@ -37,8 +37,8 @@ while ($exit == 0) {
 			print STDERR "Ending auto pull ($ARGV[0], $mon $mday, $year), $pull_ct total pulls\n";
 		}
 	} else {
-		system("git reset --hard");
-		open PULL, "git pull |";
+		system("git reset --hard >/dev/null 2>/dev/null");
+		open PULL, "git pull 2> /dev/null |";
 		$in = <PULL>; close PULL;
 		if ($in !~ /^Already/) {
 			$pull_ct++;
