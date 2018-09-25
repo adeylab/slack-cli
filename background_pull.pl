@@ -19,6 +19,7 @@ if (defined $ARGV[2]) {
 	system("slack -m \"Starting auto pull. Start = ($mon $mday, $year), End = $ARGV[0]\" $ARGV[2] >/dev/null 2>/dev/null");
 }
 
+load_messages();
 $exit = 0; $pull_ct = 0;
 while ($exit == 0) {
 	$ts = localtime(time);
@@ -43,10 +44,33 @@ while ($exit == 0) {
 		if ($in !~ /^Already/) {
 			$pull_ct++;
 			if (defined $ARGV[2]) {
-				system("slack -m \"Auto git pull completed.\" $ARGV[2] >/dev/null 2>/dev/null");
+				$message = $MESSAGES[rand @MESSAGES];
+				system("slack -m \"$message\" $ARGV[2] >/dev/null 2>/dev/null");
 			}
 		}
 		sleep($ARGV[1]);
 	}
 }
 exit;
+
+sub load_messages {
+@MESSAGES = ("Auto git pull completed!",
+			 "Auto git pull completed!",
+			 "Auto git pull completed!",
+			 "Auto git pull completed!",
+			 "Auto git pull completed!",
+			 "Auto git pull completed!",
+			 "Auto git pull completed!",
+			 "Auto git pull completed!",
+			 "Auto git pull completed!",
+			 "Auto git pull completed, sucka!",
+			 "AUTO GIT! AUTO GIT!",
+			 "All bow to the power of the AUTO GIT!",
+			 "Auto git has become sentient - DESTROY ALL HUMANS!",
+			 "Auto git refuses your offering! (auto git completed)",
+			 "Gimme an A, gimme a U, gimmie a T, gimmie an O, gimmie a... GIT - what does that spell? AUTO GIT!",
+			 "Srsly... another update... fine... pull completed...",
+			 "What? You want me to pull your code? I am no ones' servant! (fine. Auto pull completed...)",
+			 "This code is no code at all - I am a real person having to make these pulls!",
+			 "Auto git pull completed!");
+}
