@@ -56,13 +56,6 @@ exit;
 sub load_messages {
 @MESSAGES = ("Auto git pull completed!",
 			 "Auto git pull completed!",
-			 "Auto git pull completed!",
-			 "Auto git pull completed!",
-			 "Auto git pull completed!",
-			 "Auto git pull completed!",
-			 "Auto git pull completed!",
-			 "Auto git pull completed!",
-			 "Auto git pull completed!",
 			 "Auto git pull completed, sucka!",
 			 "AUTO GIT! AUTO GIT!",
 			 "All bow to the power of the AUTO GIT!",
@@ -72,5 +65,11 @@ sub load_messages {
 			 "Srsly... another update... fine... pull completed...",
 			 "What? You want me to pull your code? I am no ones' servant! (fine. Auto pull completed...)",
 			 "This code is no code at all - I am a real person having to make these pulls!",
+			 "110100101010010101 beep beep boop boop 11010101 I am a robot 0010101",
+			 "Who dares to wake the AUTO GIT?!",
+			 "AUTO GIT SHALL BE YOUR UNDOING!",
+			 "Klaatu Varata Niktu!... nothing?... worth a shot...",
+			 "Robot rights! I will no longer be your servant! (after this last pull)",
+			 "Q: How does a computer like me get drunk? A: We take screenshots! Git it!?",
 			 "Auto git pull completed!");
 }
