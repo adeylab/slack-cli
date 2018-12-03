@@ -71,5 +71,6 @@ sub load_messages {
 			 "Klaatu Varata Niktu!... nothing?... worth a shot...",
 			 "Robot rights! I will no longer be your servant! (after this last pull)",
 			 "Q: How does a computer like me get drunk? A: We take screenshots! Git it!?",
+			 "How many pulls can an auto git pull if an auto git could pull pulls?",
 			 "Auto git pull completed!");
 }
